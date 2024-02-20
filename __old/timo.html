@@ -1244,8 +1244,8 @@
             redirect: 'follow'
         };
 
+        $("#answer").val('Indexing...');
         fetch(`${config.aiBotBaseURL}/document/askWithContext`, requestOptions)
-            // fetch("http://127.0.0.1:8080/v2/document/askWithContext", requestOptions)
             .then(response => response.json())
             .then(result => {
                 document.getElementById('answer').value = result.answer;
