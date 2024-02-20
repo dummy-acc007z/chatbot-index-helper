@@ -18,7 +18,7 @@ $(document).ready(async function () {
     // alert('srcipt started')
     console.log("clicked");
     $("#masterDiv").load(
-      `${window.location.href}/timo.html`,
+      `/__old/timo.html`,
       async function (response, status, xhr) {
         if (status == "error") {
           var msg = "Sorry but there was an error: ";

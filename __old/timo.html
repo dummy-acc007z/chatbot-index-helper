@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<style>
+
+    .form-popup {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 10000;
+        left: 0;
+    }
+
+    .fixedTIMOContactSupport {
+        z-index: 10000;
+        float: right;
+        display: block;
+        right: 15px;
+        bottom: 13px;
+        position: fixed;
+        border-radius: 8px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+        /* border: 2px solid #1277d9; */
+    }
+
+    #timoSupport,
+    #resultDiv {
+        display: none;
+    }
+
+    .bot-form-container {
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        /*max-width: 100%;*/
+        padding: 0px;
+        background-color: #fff;
+        overflow-y: auto;
+        max-height: 90%;
+        max-width: 50%;
+        min-width: 350px;
+    }
+
+    .bot-form-container input[type="text"],
+    .bot-form-container textarea {
+        width: 100%;
+        background: #FFF !important;
+        border: none;
+        border-bottom: 1px solid #9FB6C1;
+        font-weight: 400;
+        margin: 4px 0px !important;
+        color: #40505b !important;
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px !important;
+        padding: 10px 0 !important;
+        resize: none;
+        border-radius: 0 !important;
+        padding: 4px !important;
+    }
+
+    /*.bot-form-container input[type="text"]:focus:not([readonly]){
+    border-bottom: 1px solid #1277d9;
+      color: #40505b;
+      outline: none !important;
+    }*/
+
+    .bot-form-container input[type="file"] {
+        width: 100%;
+        border: none;
+        font-weight: 400;
+        margin: 10px 0px !important;
+        color: #40505b !important;
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px !important;
+        padding: 8px 0 !important;
+        height: 40px;
+    }
+
+    /* .bot-form-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 0 0;
+    background: transparent !important;
+    border: 1px solid #9FB6C1;
+    border-radius: 2px;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+    color: #40505b !important;
+    resize: none;
+    height: auto;
+  } */
+
+    .bot-form-container input[type="text"]:focus,
+    .bot-form-container textarea:focus {
+        background: transparent !important;
+        outline: none !important;
+        border-bottom: 1px solid #1277D9 !important;
+        box-shadow: none !important;
+    }
+
+    .bot-form-container .btn {
+        background-color: #1277D9;
+        color: #ffffff;
+        border: none !important;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 13px !important;
+        font-weight: 500 !important;
+        padding: 12px 20px !important;
+        border-radius: 8px !important;
+        min-width: 70px !important;
+        text-transform: uppercase !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .bot-form-container .cancel {
+        background-color: #1277D9;
+    }
+
+    .bot-form-container .btn:hover {
+        background-color: #0B4A87;
+    }
+
+    #overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0);
+        z-index: 9999;
+    }
+
+    .text-danger {
+        color: #E10543 !important;
+        font-size: 12px !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    blockquote footer,
+    blockquote small,
+    blockquote .small {
+        display: block;
+        font-size: 80%;
+        line-height: 1.42857143;
+        color: #777;
+        background: transparent !important;
+        padding: 0 !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    #successDiv .modal-dialog1,
+    #errorDiv .modal-dialog1 {
+        margin: 0 !important;
+    }
+
+    #successDiv h4,
+    #errorDiv h4 {
+        font-size: 24px !important;
+        font-weight: 400 !important;
+    }
+
+    #successDiv h4,
+    #successDiv p,
+    #successDiv label {
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    #errorDiv h4,
+    #errorDiv p,
+    #errorDiv label {
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    #successDiv p,
+    #errorDiv p {
+        font-size: 14px !important;
+    }
+
+    .border-bottomTimo-danger {
+        border-bottom: 1px solid #E10543 !important;
+    }
+
+    .disabledBtn {
+        background-color: #D1D1D1 !important;
+        pointer-events: none !important;
+        cursor: not-allowed !important;
+        color: #767676 !important;
+    }
+
+    .bot-form-container .text-left h3 {
+        font-size: 26px !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    ::-webkit-input-placeholder {
+        /* Edge */
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px !important;
+        color: #63757E !important;
+    }
+
+    :-ms-input-placeholder {
+        /* Internet Explorer */
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px !important;
+        color: #63757E !important;
+    }
+
+    ::placeholder {
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 14px !important;
+        color: #63757E !important;
+    }
+
+    .charRemaining {
+        text-align: right !important;
+        margin: 6px 0 6px 0 !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 13px !important;
+        font-weight: normal !important;
+    }
+
+    .bacscrollStop {
+        /* overflow: hidden !important;
+        position: fixed; */
+    }
+
+    .closePopup {
+        font-size: 30px !important;
+        float: right !important;
+        font-weight: 600 !important;
+        line-height: 0.8;
+        color: #FFF !important;
+        text-shadow: 0 1px 0 #fff;
+        background-color: transparent !important;
+        border: none !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        outline: none !important;
+        margin-right: 5px;
+        padding: 5px;
+    }
+
+    .closePopup:hover {
+        text-decoration: none;
+        cursor: pointer;
+        filter: alpha(opacity=50);
+        opacity: 1;
+    }
+
+    #fileUpload::-webkit-file-upload-button {
+        font-size: 14px;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 400;
+        color: #40505b;
+        padding: 0px 5px;
+        margin-top: 0px
+    }
+
+    .titleDivTimo {
+        background-color: #1277D9;
+        color: #fff;
+        height: 70px;
+        padding: 10px 10px 10px 12px;
+        /* width: 100%; */
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        display: flex;
+        position: relative;
+    }
+
+    .leftClsTimo {
+        float: right;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        background-color: #ffffff;
+        border: 1px #ffffff;
+        padding: 10px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    .forDisClass:disabled,
+    .forDisClass[readonly] {
+        cursor: not-allowed;
+    }
+
+    .rightClsTimo {
+        padding: 8px 20px 8px 8px !important;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        display: flex;
+    }
+
+    .fontCls1Timo {
+        font-size: 22px;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+        white-space: nowrap;
+    }
+
+    .contactSupportFormClass {
+        color: #40505b;
+        /* width: 100%; */
+        padding: 15px 30px;
+        background: #fff;
+        margin: 0;
+        border-radius: 10px;
+        max-width: 100%;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    .alert {
+        position: relative;
+        padding: 15px;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+    }
+
+    .text-center {
+        text-align: center !important;
+    }
+
+    .blockquote {
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+
+    blockquote {
+        margin: 0 0 1rem;
+    }
+
+    .blockquote-footer {
+        display: block;
+        font-size: 15px;
+        color: #40505b;
+    }
+
+    .modal-dialog1 {
+        position: relative;
+        width: auto;
+        margin: .5rem;
+        pointer-events: none;
+    }
+
+    .modal-content1 {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 100%;
+        pointer-events: auto;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+    }
+
+    .progressbarDiv {
+        display: none;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: 0 auto;
+        opacity: 0.6;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .loading {
+        height: 0;
+        width: 0;
+        padding: 15px;
+        border: 6px solid #ccc;
+        border-right-color: #888;
+        border-radius: 22px;
+        animation: rotate 1s infinite linear;
+        -webkit-animation: rotate 1s infinite linear;
+        /* left, top and position just for the demo! */
+        position: absolute;
+        left: 45%;
+        top: 45%;
+    }
+
+    button {
+        background: #1277d9;
+        color: white;
+        border: none;
+        font-size: 12px;
+        padding: 8px 16px;
+        margin: 8px 0;
+        border-radius: 8px;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    button:hover {
+        background-color: #0B4A87;
+    }
+
+    button:disabled {
+        opacity: 0.4;
+    }
+
+    #answerConfirmation {
+        margin: 4px;
+    }
+
+    .clickable-text {
+        text-transform: uppercase;
+        font-weight: 400;
+        color: #1277d9;
+        cursor: pointer;
+        margin: 0 8px;
+    }
+    
+    .clickable-text:hover {
+        color: #0B4A87;
+    }
+
+    @keyframes rotate {
+
+        /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes rotate {
+
+        /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+/* ====================================== */
+    .actionButtonsDiv {
+        display: flex; 
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin-top: 8px;
+    }
+
+    .actionButton {
+        height: 16px;
+        width: 16px;
+        margin: 8px 12px;
+        cursor: pointer;
+    }
+
+    .closeBtnDiv {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .uploadFormCls {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .selectTypeCls {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .inputGroupCls {
+        padding: 5px;
+        border: solid 1px;
+        border-radius: 5px;
+    }
+
+    .uploadActionButtondiv{
+        margin-top: 35px;
+    }
+
+    .editActionButtondiv {
+        /* margin: 16px; */
+    }
+
+    #editorjs {
+        height: 280px;
+        width: 300px;
+        overflow: hidden;
+        overflow-y: auto;
+        border-bottom: 1px solid #9FB6C1;
+    }
+
+    .codex-editor__redactor {
+        padding: 0px 0px 100px !important;
+    }
+
+    .ce-block {
+        /* height: 250px; */
+    }
+
+    .cancelUpload {
+        background: gray;
+    }
+
+    /* .inputGroupCls input[type="file"] {
+        display: none;
+    } */
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+    /* ====================================== */
+
+    .contactSupportTimo {
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Work Sans', sans-serif;
+    }
+
+    .no_result {
+        padding: 4px 8px;
+    }
+
+    @media (min-width: 576px) {}
+
+    /* Medium devices (tablets, 768px and up) */
+
+    @media (min-width: 768px) {
+        .col-md-8 {
+            max-width: 60%;
+        }
+    }
+
+    /* Large devices (desktops, 992px and up) */
+
+    @media (min-width: 992px) {
+        .col-lg-4 {
+            max-width: 30%;
+        }
+    }
+
+    /* Extra large devices (large desktops, 1200px and up) */
+
+    @media (min-width: 1200px) {}
+</style>
+
+<div class="contactSupportTimo">
+    <div class="bot-form-container fixedTIMOContactSupport col-lg-4 col-md-8 col-sm-12 col-xs-12"
+        id="timoSupportmainDiv">
+        <div class="progressbarDiv" id="progressbarTimo" style="display: none;">
+            <div class="loading"></div>
+        </div>
+        <div class="titleDivTimo">
+            <div class="leftClsTimo">
+                <img alt="Logo" src="https://dmr.exela.global/assets/images/dmr_loader_logo.png" title="DMR" width="50px"
+                    height="50px">
+            </div>
+            <div class="rightClsTimo">
+                <div class="fontCls1Timo">
+                    Get Help
+                </div>
+
+                <div id="actionButtons" class="actionButtonsDiv">
+                    <!-- <div id="editButton" class="actionButton"><i class="fa-regular fa-pen-to-square" style="color: #2671f2;"></i></div>
+                    <div id="uploadButton" class="actionButton"><i class="fa-solid fa-file-arrow-up" style="color: #2671f2;"></i></div> -->
+                    <svg id="editActionButton" class="actionButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg>
+                    <svg id="uploadActionButton" class="actionButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM216 408c0 13.3-10.7 24-24 24s-24-10.7-24-24V305.9l-31 31c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l72-72c9.4-9.4 24.6-9.4 33.9 0l72 72c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-31-31V408z"/></svg>
+                </div>
+            </div>
+            <div class="closeBtnDiv">
+                <button type="button" class="closePopup closeSupport" aria-label="Close" onclick="resetForm()">
+                    <span aria-hidden="true" style="font-size:30px">×</span>
+                </button>
+            </div>
+
+        </div>
+        <div class="contactSupportFormClass">
+            <div id="chatSupport" style="display: block;">
+                <form id="chatSupportForm"> 
+                    <textarea id="question" class="forValidation" rows="2" maxlength="1200" required=""
+                        style="width: 100% !important;height: 50% !important;"
+                        placeholder="How may I help you? (Press Enter to submit your query)"></textarea>
+                    <textarea id="answer" readonly class="forValidation" rows="10" maxlength="3600" required=""
+                        style="width: 100% !important;height: 50% !important;"
+                        placeholder="..."></textarea>
+                </form>
+                <form id="uploadForm" enctype="multipart/form-data" class="d-none" style="display: none;" class="uploadFormCls">
+                    <div class="selectTypeCls">
+                        <label>Select the file Type:</label>
+                        <select id= "fileType">
+                            <option value= "doc">Document (pdf/doc/txt/md)</option>
+                            <option value= "url">File with URLs (txt)</option>
+                            <option value= "cache">Cache (priviledged usage)</option>
+                        </select>
+                    </div>
+                    <div class="inputGroupCls">
+                        <label for="uploadFile" class="custom-file-upload">Select the file to upload</label>
+                        <input id="uploadFile" type="file"/>
+                    </div>
+                    <div class="uploadActionButtondiv">
+                        <button id="cancelUploadButton" class="cancelUpload" onclick="onCancelBtn()">Cancel</button>
+                        <button id="uploadButton">Upload</button>
+                    </div>
+                </form>
+
+                <form id="editArea" style="display: none;">
+                    <div id="editorjs"></div>
+                    <div class="editActionButtondiv">
+                        <button id="cancelEditButton" class="cancelUpload">Cancel</button>
+                        <button id="editButton">INDEX</button>
+                    </div>
+                </form>
+                <form id="contactSupportForm" class="d-none" style="display: none;">
+                    <!-- <span id="message" class="attach-file-label d-none">I am sorry I was unable to help you. Please write to us about your issue and we'll get back to you shortly.</span> -->
+                    <!-- <label for="validationRequestorEmail">Requestor Name<abbr class="text-danger" >*</abbr></label> -->
+                    <input type="text" placeholder="Name *" id="createdBy" maxlength="30"
+                        onkeypress="return /^[A-Za-z_\s]+$/.test(event.key)" class="forValidation forDisClass"
+                        autocomplete="off">
+                    <span id="createdByValidation" class="text-danger" style="display: none;">Please Enter Requestor
+                        Name</span>
+                    <!-- <label for="validationRequestorEmail">Requestor Email<abbr class="text-danger" ></abbr></label> -->
+                    <input type="text" class="forEmailValidation forDisClass" placeholder="Email *"
+                        id="requestorEmail" oninput="validateEmail(this.value)" autocomplete="off" maxlength="50">
+                    <span id="requestorEmailValidation" class="text-danger" style="display: none;">Incorrect email
+                        format</span>
+
+                    <!-- <label for="validationShortDescription">Subject<abbr class="text-danger" >*</abbr></label> -->
+                    <input type="text" id="shortDescription" class="forValidation" placeholder="Subject *"
+                        autocomplete="off" maxlength="500" required="">
+                    <span id="shortDescriptionValidation" class="text-danger" style="display: none;">Please Enter
+                        Subject</span>
+                    <!-- <label for="validationFullDescription">Issue Description<abbr class="text-danger" >*</abbr></label> -->
+
+                    <textarea id="fullDescription" class="forValidation" rows="5" maxlength="2600"
+                        oninput="fullDiscountChar(this)" required=""
+                        style="width: 100% !important;height: 50% !important;"
+                        placeholder="Full Description *"></textarea>
+                    <span id="fullDescriptionValidation" class="text-danger" style="display: none;">Please Enter Full
+                        Description</span>
+                    <div class="text-mute charRemaining"> Characters remaining : <span id="fullDescriptionCharCount">
+                            2600
+                        </span></div>
+
+                    <div class="uploadBtnWrap" id="uploadBtnWrap">
+                        <input type="file" id="fileUpload" onchange="previewFile()">
+                        <span class="attach-file-label">Attach File</span>
+                        <input type="text" class="attachedlabel" id="attachedfileName" readonly="">
+
+                    </div>
+                    <span id="uploadFileSizeValidation" class="text-danger" style="display: none;">File Size Exceeds 20
+                        MB</span>
+
+                    <div class="form-row" style="margin: 0 !important;margin-top: .5rem!important;">
+                        <button class="btn" type="button" id="contactSupportSubmit">Submit</button>
+
+                    </div>
+                </form>
+            </div>
+
+            <!-- </div> -->
+            <div id="resultDiv">
+                <div class="bot-form-container">
+                    <div id="successDiv" style="display: none">
+                        <div class="modal-dialog1" style="width:auto !important">
+                            <div class="modal-content1">
+                                <div class="alert1" style="margin-bottom:0px;padding: 10px;">
+                                    <blockquote class="blockquote text-center" style="border:0px;padding: 0;">
+                                        <h4 class="display-5">Thank you for contacting the support team.</h4>
+                                        <hr>
+                                        <p style="margin-bottom: 0!important;">Your ticket has been created
+                                            successfully!</p>
+                                        <footer class="blockquote-footer">Your ticket reference # <cite
+                                                title="Source Title" id="refrenceNumber"></cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin: 0 !important;margin-top: .5rem!important;">
+                            <button type="button" class="btn cancel closeSupport">Close</button>
+                        </div>
+                    </div>
+                    <div id="errorDiv" style=" display: none">
+                        <div class="modal-dialog1" style="width:auto !important">
+                            <div class="modal-content1 ">
+                                <div class="alert1" style="margin-bottom:0px;padding: 10px;">
+                                    <p class="lead">Error ...!</p>
+                                    <p id="msg"> While contacting the support team</p>
+                                    <p id="msg"> Want to try again? <a href="#" onclick="resetForm()">Click Here</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin: 0 !important;margin-top: .5rem!important;">
+                            <button type="button" class="btn cancel closeSupport">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p id="answerConfirmation" style="display:none">
+                    Is this answer correct? <span id="confirm-yes" class="clickable-text"> Yes </span> <span id="confirm-no" class="clickable-text"> No </span>
+                </p>
+                <!-- <button id="botSwitch" style="display: none;">
+                    Switch to Bot
+                </button>
+                <button id="supportSwitch">
+                    Switch to Support
+                </button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var config = {
+        aiBotBaseURL: "https://chat-pybridge-qa.exela.global/v2",
+        productCode: window.__env.PRODUCTCODE,
+        exitCommand: "exit",
+        enableSupportSwitch: false,
+        questionPlaceholder: "How may I help you?",
+        answerPlaceholder: `I am an automated chatbot, you can ask me anything about ${window.__env.PRODUCTNAME}...`,
+    }
+
+    var editor;
+
+    var isProdEnv = false;
+
+    var chatHistory = [];
+
+    /*window.onbeforeunload = function (event) {
+        askbot("exit");
+    };*/
+
+    if (config.enableSupportSwitch) {
+        $("#supportSwitch").click(async () => {
+            $("resultDiv").hide();
+
+            $("#supportSwitch").hide();
+            $("#contactSupportForm").show();
+
+            $("#botSwitch").show();
+            $("#chatSupportForm").hide();
+
+            if (!chatHistory.length) return;
+
+            var description = chatHistory.map(e => e.join("\n")).join('\n\n');
+            fillSupportForm(chatHistory[0][0], description);
+        })
+    } else {
+        $("#supportSwitch").hide();
+    }
+
+    if (config.answerPlaceholder) {
+        $("#answer").attr("placeholder", config.answerPlaceholder)
+    }
+
+    function fillSupportForm(subject, description) {
+        console.log('trying to fill support form');
+        $("#shortDescription").val(subject)
+        $("#fullDescription").val(description)
+    }
+
+    $("#botSwitch").click(() => {
+        $("#supportSwitch").show();
+        $("#contactSupportForm").hide();
+
+        $("#botSwitch").hide();
+        $("#chatSupportForm").show();
+    })
+
+
+    $("submitButton").click(()=> {
+        window.alert("submit hit !!");  
+    })
+
+    $("#uploadActionButton").click(() => {
+        $("#actionButtons").css("visibility", "hidden");
+        $("#chatSupportForm").hide();
+        $("#uploadForm").show();
+        $("#uploadFile").val(null);
+    });
+
+    $("#editActionButton").click(async () => {
+        $("#chatSupportForm").hide();
+        $("#actionButtons").css("visibility", "hidden");
+        $("#editArea").show();
+        try {
+            if (!editor) {
+                editor = new EditorJS({
+                holder: 'editorjs',
+                placeholder: 'Add information to index...'
+            });
+            }
+        } catch(err) {
+            console.error(err);
+        }
+    })
+
+    $("#uploadButton").click(async function(event){
+        
+        event.preventDefault();
+        
+        var uploadVal = $("#uploadButton").text();
+        console.log('upload button val', uploadVal);
+        if (uploadVal == "Please wait...") return;
+        
+        var selectedType= document.querySelector('#fileType').value;
+        console.log("selected fileType = ", selectedType);
+
+        var myHeaders = new Headers();
+        myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+        const form = document.getElementById("uploadForm");
+        const inputFile = document.getElementById("uploadFile");
+
+        if (inputFile.files.length == 0) {
+            window.alert("Select one or more files.");
+        } else {    
+            // $("body").css("cursor", "progress");
+
+            const formData = new FormData();
+            for (const file of inputFile.files) {
+                formData.append("file", file);
+            }
+
+            formData.append("fileType", selectedType);
+            formData.append('productId', config.productCode.toLowerCase());
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: formData,
+                redirect: 'follow'
+            };
+
+            $("#uploadButton").text("Please wait...");
+            var response = await fetch(`${config.aiBotBaseURL}/uploadfile`, requestOptions);
+            
+            // $("body").css("cursor", "default");
+
+            var uploadResult = await response.json();
+            console.log("response => ", uploadResult);
+            window.alert(uploadResult.message);
+
+            $("#uploadForm").hide();
+            $("#actionButtons").css("visibility", "visible");
+            $("#chatSupportForm").show();    
+
+            $("#uploadButton").text("Upload");
+
+        }
+
+    }); 
+
+    $("#cancelUploadButton").click(async function(event) {
+        event.preventDefault();
+        $("#actionButtons").css("visibility", "visible");
+        
+        $("#uploadForm").hide(); 
+        $("#chatSupportForm").show(); 
+    })
+
+    $("#editButton").click(async function(event){
+        event.preventDefault();
+
+        console.log('done');
+        const editorjsOutput = await editor.save();
+        const outputText = editorjsOutput.blocks.map(e => e && e.data && e.data.text).join("\n");
+        console.log('output', outputText);
+        // return;
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+        const textString = {
+            textToIndex: outputText,
+            productId: config.productCode.toLowerCase()
+        };
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: JSON.stringify(textString),
+            redirect: 'follow'
+        };
+
+        var response = await fetch(`${config.aiBotBaseURL}/uploadtext`, requestOptions);
+        
+        // $("body").css("cursor", "default");
+
+        var uploadResult = await response.json();
+        console.log("response => ", uploadResult);
+        window.alert(uploadResult.message);
+
+        $("#editArea").hide();
+        $("#actionButtons").css("visibility", "visible");
+        $("#chatSupportForm").show();    
+        
+
+    }); 
+
+
+    $("#cancelEditButton").click(async function(event) {
+        event.preventDefault();
+        $("#actionButtons").css("visibility", "visible");
+        
+        $("#editArea").hide(); 
+        $("#chatSupportForm").show(); 
+    })
+    
+    $("#question").on("keyup", (e) => {
+        if (!$("#question").val()) {
+            $("#answer").val("");
+            $("#answerConfirmation").hide();
+        } else {
+            if (isProdEnv) return;
+            var q = e.currentTarget.value.trim();
+            if (e.key == 'Enter' && e.altKey) {
+                showbot(q);
+                return;
+            }
+            if (e.key == 'Enter') {
+                askbot(q)
+            }
+        }
+    })
+
+    $("#confirm-yes").click(async function () {
+        try {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Accept", "application/json");
+            myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+
+            var question = $("#question").val();
+            var answer = $("#answer").val();
+
+            var raw = JSON.stringify({
+                "query": question,
+                "answer": answer,
+                "productId": config.productCode.toLowerCase()
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            var response = await fetch(`${config.aiBotBaseURL}/document/confirm`, requestOptions)
+            var result = await response.json();
+
+            $("#answerConfirmation").hide();
+
+        } catch(err) {
+            console.error('cache error', err);
+        }
+    })
+
+    $("#confirm-no").click(async function () {
+        try {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Accept", "application/json");
+            myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+            var question = $("#question").val();
+            var answer = $("#answer").val();
+            if (chatHistory.length) {
+                question = chatHistory[chatHistory.length -1][0]
+                answer = chatHistory[chatHistory.length -1][1]
+            }
+
+            var raw = JSON.stringify({
+                "query": question,
+                "remove": true,
+                "productId": config.productCode.toLowerCase()
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            var response = await fetch(`${config.aiBotBaseURL}/document/confirm`, requestOptions)
+            var result = await response.json();
+
+            $("#answerConfirmation").hide();
+
+        } catch(err) {
+            console.error('cache error', err);
+        }
+    })
+
+    $(".closeSupport").click(async function () {
+         $("#overlay").hide();
+         $("#timoSupportmainDiv").hide();
+         $("#resultDiv").hide();
+         $(".open-button").show();
+
+        //await askbot("exit");
+    });
+
+    $('#contactSupportSubmit').on('click', function () {
+
+        if ($('#requestorEmail').val() == "" || emailValidFlag == false) {
+            validateEmail($('#requestorEmail').val());
+        }
+        if ($('#createdBy').val() == "" || $('#shortDescription').val() == "" || $('#fullDescription').val() == "" || emailValidFlag == false) {
+            validationForm();
+
+            $(this).removeClass('disabledBtn');
+
+        } else {
+            saveContactSupport();
+            $(this).addClass('disabledBtn');
+        }
+    });
+
+    $(".forValidation").on("keyup", function (e) {
+
+        if ($(this).val() == "") {
+            $(this).addClass('border-bottomTimo-danger');
+            $("#" + this.id + "Validation").show();
+        } else {
+            $(this).removeClass('border-bottomTimo-danger');
+            $("#" + this.id + "Validation").hide();
+            console.log(this.id + "Validation")
+        }
+    });
+
+    $(".forEmailValidation ,.forValidation").keydown(function (e) {
+
+        if (e.which === 32 && !this.value.length)
+            e.preventDefault();
+
+    });
+
+    function validationForm() {
+
+        if ($('#createdBy').val() == "") {
+            $('#createdBy').addClass('border-bottomTimo-danger');
+            $('#createdByValidation').show();
+        } else {
+            $('#createdBy').removeClass('border-bottomTimo-danger');
+            $('#createdByValidation').hide();
+        }
+
+        if ($('#shortDescription').val() == "") {
+            $('#shortDescription').addClass('border-bottomTimo-danger');
+            $('#shortDescriptionValidation').show();
+        } else {
+            $('#shortDescription').removeClass('border-bottomTimo-danger');
+            $('#shortDescriptionValidation').hide();
+        }
+
+        if ($('#fullDescription').val() == "") {
+            $('#fullDescription').addClass('border-bottomTimo-danger');
+            $('#fullDescriptionValidation').show();
+        } else {
+            $('#fullDescription').removeClass('border-bottomTimo-danger');
+            $('#fullDescriptionValidation').hide();
+        }
+    }
+
+    var emailValidFlag = false;
+
+    function validateEmail(emailField) {
+
+        if (emailField == "") {
+            $('#requestorEmailValidation').show();
+            $("#requestorEmailValidation").text("Please Enter Requestor Email");
+            $('#requestorEmail').addClass('border-bottomTimo-danger');
+            return false;
+        }
+
+        $('#requestorEmailValidation').hide();
+        $('#requestorEmail').removeClass('border-bottomTimo-danger');
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(emailField)) {
+            $('#requestorEmailValidation').hide();
+            $('#requestorEmail').removeClass('border-bottomTimo-danger');
+            emailValidFlag = true;
+            return true;
+        } else {
+            if (emailField != "") {
+                $('#requestorEmailValidation').show();
+                $("#requestorEmailValidation").text("Incorrect email format");
+                $('#requestorEmail').addClass('border-bottomTimo-danger');
+                emailValidFlag = false;
+
+                return false;
+            } else {
+                emailValidFlag = true;
+            }
+        }
+
+    }
+
+    async function askbot(v) {
+        $("#answerConfirmation").hide();
+        var aiaction = "Thinking...";
+        if (v.trim() == "exit") aiaction = "Exiting...";
+        $("#answer").val(aiaction);
+
+        if (v.trim() == "") return;
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+        var productSuffix = " for " + config.productCode;
+        var isExitRequest = v.trim() == "exit";
+        var v_copy = v;
+        if (v.trim().endsWith("?")) v = v.trim().replace("/?/g", ',');
+        // if (!isExitRequest) v = v + productSuffix;
+
+        var raw = JSON.stringify({
+            "query": v,
+            "productId": config.productCode.toLowerCase()
+        });
+
+        
+        var abortController = new AbortController();
+        setTimeout(() => abortController.abort(), 10000);
+
+        var failMessage = "OpenAI limit reached! Unable to serve right now, please try again or Contact Support.";
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow',
+            signal: abortController.signal
+        };
+
+        try {
+            var response = await fetch(`${config.aiBotBaseURL}/document/ask`, requestOptions)
+
+            var result = await response.json();
+            if (isExitRequest) {
+                if ($(".closeSupport").length) {
+                    $("#overlay").hide();
+                    $("#timoSupportmainDiv").hide();
+                    $("#resultDiv").hide();
+                    $(".open-button").show();
+                }
+                return;
+            }
+
+            if (!result || !result.answer) {
+                result = {
+                    answer: failMessage
+                }
+            } else if (!isProdEnv) {
+                $("#answerConfirmation").show();
+            }
+
+            $("#answer").val(result.answer);
+            chatHistory.push([v_copy, result.answer]);
+            if (result.answer.trim() == "I don't know.") {
+                $('#contactSupportForm').removeClass();
+                $('#message').removeClass();
+                $('#chatSupportForm').addClass('d-none');
+            }
+        } catch (error) { 
+            $("#answer").val(failMessage);
+            if (error.name == 'AbortError') {
+                // alert("Aborted!");
+                console.log('call aborted');
+            }
+            console.error(error); 
+        };
+    }
+
+    function showbot(v) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Accept", "application/json");
+        myHeaders.append("Cookie", "connect.sid=s%3A6baA3C0lMrfkQnVCw72BtnJBF1818RuP.t4lDip5U0EKWHncsWc2IEYKOp%2FHCLnzla%2Bfemh14fdU");
+
+        var raw = JSON.stringify({
+            "query": v,
+            "history": [],
+            "productId": config.productCode.toLowerCase()
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch(`${config.aiBotBaseURL}/document/askWithContext`, requestOptions)
+            // fetch("http://127.0.0.1:8080/v2/document/askWithContext", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                document.getElementById('answer').value = result.answer;
+            })
+            .catch(error => console.log('error', error));
+    }
+
+    function fullDiscountChar(valFullDis) {
+        var len = valFullDis.value.length;
+        var fulldismaxlength = valFullDis.maxLength;
+        if (len > fulldismaxlength) {
+            valFullDis.value = valFullDis.value.substring(0, fulldismaxlength);
+        } else {
+            $('#fullDescriptionCharCount').text(fulldismaxlength - len);
+        }
+    };
+    // for mobile device width and height -- Mahesh Gund
+    //alert(window.innerWidth + " * "  + window.innerHeight);
+</script>

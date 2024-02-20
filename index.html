@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI BOT INDEX HELPER</title>
+    <script src="https://exelachatbot-dufge8a3aththpcc.z01.azurefd.net/js/jquery-min.js"></script>
+
     <style>
         #productId{
             display: flex;
@@ -19,6 +21,9 @@
                 padding: 8px;
                 margin: 0;
             }
+            li {
+                font-size: 28px;;
+            }
         }
     </style>
 </head>
@@ -26,6 +31,22 @@
 <body>
     <div class="productInfo" id="productId">
         <p>AI Bot Index Helper</p>
-        <!--<p>productcode: spring benefit</p>-->
+        <ol id="productList">
+        </ol>
     </div>
+
+    <script>
+        var productList = [
+            { url: '/dmr', name: 'DMR' },
+            { url: '/drysign', name: 'DrySign' },
+            { url: '/pch_global', name: 'PCH Global' },
+            { url: '/xbp_europe', name: 'XBP Europe' },
+            { url: '/p2p', name: 'P2P' },
+            { url: '/spring_benefit', name: 'Spring Benefit' }
+        ]
+        productList.forEach((product) => {
+            var newEle = $('<li/>').html(`<a href=${product.url}>${product.name}</a>`);
+            $("#productList").append(newEle);
+        })
+    </script>
 </html>
