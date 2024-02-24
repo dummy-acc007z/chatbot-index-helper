@@ -40,14 +40,7 @@ jobs:
           replace: chatbot-index-helper/old
           include: |
             **/index.html
-            /old/js/timo.js
-      - name: Adding repo name to product url
-        uses: thiagodnf/string-replacer@v1.0.2
-        with:
-          find: product.url
-          replace: /chatbot-index-helper/product.url
-          include: |
-            index.html
+            **/timo.js
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
