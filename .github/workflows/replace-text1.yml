@@ -34,8 +34,13 @@ jobs:
       - name: String Replacer
         uses: thiagodnf/string-replacer@v1.0.2
         with:
-          find: chatbot-index-helper/old
-          replace: chatbot-index-helper/__old
+          find: chatbot-index-helper
+          replace: wow-this-works
+          include: |
+            index.html
+          exclude: |
+            .git/**
+            .github/**
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
