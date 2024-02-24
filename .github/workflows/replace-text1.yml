@@ -32,15 +32,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Rename folder
-        run: mv __old updated-old
+        run: mv __old old
       - name: String Replacer
         uses: thiagodnf/string-replacer@v1.0.2
         with:
-          find: chatbot-index-helper
-          replace: wow-this-works
+          find: __old
+          replace: chatbot-index-helper/old
           include: |
             **/index.html
-            old/timo.js
+            /old/timo.js
           exclude: |
             .git/**
             .github/**
