@@ -18,7 +18,7 @@ $(document).ready(async function () {
     // alert('srcipt started')
     console.log("clicked");
     $("#masterDiv").load(
-      `//chatbot-index-helper/old/timo.html`,
+      `/chatbot-index-helper/old/timo.html`,
       async function (response, status, xhr) {
         if (status == "error") {
           var msg = "Sorry but there was an error: ";
