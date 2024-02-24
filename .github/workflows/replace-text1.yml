@@ -31,13 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Rename folder
+        run: mv __old updated-old
       - name: String Replacer
         uses: thiagodnf/string-replacer@v1.0.2
         with:
           find: chatbot-index-helper
           replace: wow-this-works
           include: |
-            index.html
+            **/index.html
+            old/timo.js
           exclude: |
             .git/**
             .github/**
