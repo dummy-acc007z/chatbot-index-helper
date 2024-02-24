@@ -37,12 +37,12 @@
 
     <script>
         var productList = [
-            { url: '/dmr', name: 'DMR' },
-            { url: '/drysign', name: 'DrySign' },
-            { url: '/pch_global', name: 'PCH Global' },
-            { url: '/xbp_europe', name: 'XBP Europe' },
-            { url: '/p2p', name: 'P2P' },
-            { url: '/spring_benefit', name: 'Spring Benefit' }
+            { url: 'dmr', name: 'DMR' },
+            { url: 'drysign', name: 'DrySign' },
+            { url: 'pch_global', name: 'PCH Global' },
+            { url: 'xbp_europe', name: 'XBP Europe' },
+            { url: 'p2p', name: 'P2P' },
+            { url: 'spring_benefit', name: 'Spring Benefit' }
         ]
         productList.forEach((product) => {
             var newEle = $('<li/>').html(`<a href=${product.url}>${product.name}</a>`);
