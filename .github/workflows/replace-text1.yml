@@ -31,19 +31,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Rename folder
+      - name: Rename folder __old to old
         run: mv __old old
-      - name: String Replacer
+      - name: String Replacer __old to chatbot-index-helper/old
         uses: thiagodnf/string-replacer@v1.0.2
         with:
           find: __old
           replace: chatbot-index-helper/old
           include: |
             **/index.html
-            /old/timo.js
-          exclude: |
-            .git/**
-            .github/**
+            /old/js/timo.js
+      - name: Adding repo name to product url
+        uses: thiagodnf/string-replacer@v1.0.2
+        with:
+          find: product.url
+          replace: /chatbot-index-helper/product.url
+          include: |
+            index.html
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
